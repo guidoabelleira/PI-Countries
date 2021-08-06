@@ -2,9 +2,9 @@ require('dotenv').config();
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
-const {DB_USER, DB_PASSWORD, DB_HOST} = process.env;
+const {DB_USER, DB_PASSWORD, DB_HOST, DB_NAME} = process.env;
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/countries`, {
+const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`, {
   logging: false, // establecer en console.log para ver las consultas SQL sin procesar
   native: false, // le permite a Sequelize saber que podemos usar pg-native para ~ 30% más de velocidad
 });
