@@ -5,7 +5,7 @@ module.exports = (sequelize) => {
   // defino el modelo
   return sequelize.define('country', {
     alpha3Code: {
-      type: DataTypes.STRING(3),
+      type: DataTypes.STRING,
       allowNull: false,
       primaryKey: true
     },

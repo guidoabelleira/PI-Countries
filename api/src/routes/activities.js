@@ -1,14 +1,17 @@
 const express = require('express');
-const {Activity} = require('../db');
+const {Activity, Country} = require('../db');
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res, next) => {
     // res.send('entro activities')
-    return Activity.findAll()
-    .then((activity) => {
+    try {
+        const activity = await Activity.findAll()
         return res.json(activity)
-    })
+    } catch (error){
+        next(error);
+    }
+    
 });
 // ID
 // Nombre
@@ -16,9 +19,9 @@ router.get('/', (req, res) => {
 // Duración
 // Temporada (Verano, Otoño, Invierno o Primavera)
 
-router.post('/', async (req, res) => {
+router.post('/activity', async (req, res, next) => {
     // res.send('ingreso actividad')
-    const {name, difficulty, duration, season, id} = req.body;
+    const {name, difficulty, duration, season, id, alpha3Code} = req.body;
     try {
         const createdActivity = await Activity.create({
             name,
@@ -27,11 +30,12 @@ router.post('/', async (req, res) => {
             season,
             id
         })
-        res.json(createdActivity)
+        var country = await Country.findByPk(alpha3Code);
+        var activityCountry = await country.addActivity(createdActivity)
+        res.send(activityCountry)
     } catch(error) {
-        console.log(error);
-    }
-    
+        next(error);
+    }  
 });
 
 module.exports = router;

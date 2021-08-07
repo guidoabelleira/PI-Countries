@@ -32,9 +32,9 @@ const { Country, Activity } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
-Activity.belongsToMany(Country, {through: 'country_activities'});
+Activity.belongsToMany(Country, {through: 'Country_Activity'});
 // una actividad pertenece a muchos paises
-Country.belongsToMany(Activity, {through: 'country_activities'}); 
+Country.belongsToMany(Activity, {through: 'Country_Activity'}); 
 // un pais tiene muchas actividades
 
 module.exports = {

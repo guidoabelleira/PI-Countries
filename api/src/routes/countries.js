@@ -1,14 +1,50 @@
 const express = require('express');
-const {Country} = require('../db');
+const {Country, Activity} = require('../db');
+const axios = require('axios');
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    return Country.findAll()
-    .then((country) => {
+router.get('/', async (req, res, next) => {
+    try {
+        const country = await Country.findAll({
+            include: Activity
+        })
         return res.json(country)
-    })
-    // res.send('entro countries')
+    } catch (error) {
+        next(error);
+    }
+});
+
+router.post('/', async (req, res, next) => {
+    res.send('ingreso "country"')
+    // var apiCountryPromise = axios.get('https://restcountries.eu/rest/v2/all');
+    // var dbCountryPromise = Country.findAll({
+    //     include: Activity
+    // })
+    // return Promise.all([
+    //     apiCountryPromise,
+    //     dbCountryPromise
+    // ]).then(country => {
+    //     console.log(country[0].data)
+    //     var apiCountry = country[0].data;
+    //     var dbCountry = 
+    //     res.send('...')
+    // })
+    // try {
+    //     const createCountry = await Country.create({
+    //         alpha3Code, 
+    //         name, 
+    //         flag, 
+    //         region, 
+    //         capital, 
+    //         subregion, 
+    //         area, 
+    //         population
+    //     })
+    //     res.json(createCountry)
+    // } catch(error) {
+    //     console.log(error);
+    // }  
 });
 
 router.get('/:idPais', (req, res) => {
