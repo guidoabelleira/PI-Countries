@@ -15,42 +15,25 @@ router.get('/', async (req, res, next) => {
     }
 });
 
-router.post('/', async (req, res, next) => {
-    res.send('ingreso "country"')
-    // var apiCountryPromise = axios.get('https://restcountries.eu/rest/v2/all');
-    // var dbCountryPromise = Country.findAll({
-    //     include: Activity
-    // })
-    // return Promise.all([
-    //     apiCountryPromise,
-    //     dbCountryPromise
-    // ]).then(country => {
-    //     console.log(country[0].data)
-    //     var apiCountry = country[0].data;
-    //     var dbCountry = 
-    //     res.send('...')
-    // })
-    // try {
-    //     const createCountry = await Country.create({
-    //         alpha3Code, 
-    //         name, 
-    //         flag, 
-    //         region, 
-    //         capital, 
-    //         subregion, 
-    //         area, 
-    //         population
-    //     })
-    //     res.json(createCountry)
-    // } catch(error) {
-    //     console.log(error);
-    // }  
-});
-
-router.get('/:idPais', (req, res) => {
-    const {idPais} = req.params;
-
-    res.send('Obtener el detalle de un país en particular ' + idPais)
+router.get('/:idPais', async (req, res, next) => {
+    const idPais = req.params.idPais;
+    if(!idPais){
+        return next({msg: 'Id Pais incorrecto', status: 500});
+    }
+    // var country;
+    try {
+        if(typeof idPais === 'string' && idPais.length === 3){
+            let country = await Country.findByPk(idPais, {
+                include: Activity
+            });
+            if(country === null){
+                return next(error);
+            }
+            return res.json({country});
+        }
+    } catch (error){
+        return next(error);
+    }
 })
 
 module.exports = router;
