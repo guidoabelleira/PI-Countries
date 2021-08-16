@@ -2,6 +2,7 @@ const express = require('express');
 const {Country, Activity} = require('../db');
 const axios = require('axios');
 
+
 const router = express.Router();
 
 router.get('/', async (req, res, next) => {
@@ -29,12 +30,35 @@ router.get('/:idPais', async (req, res, next) => {
             if(country === null){
                 return next(error);
             }
+            return res.json(country);
+        }
+    } catch (error){
+        return next(error);
+    }
+})
+
+router.get('/:name', async (req, res, next) => {
+    const {nameF} = req.params;
+    if(!nameF){
+        return next({msg: 'Name Pais incorrecto', status: 500});
+    }
+    try {
+        if(typeof nameF === 'string'){
+            let country = await Country.findOne({
+                where: {
+                    name: nameF
+                }
+            });
+            if(country === null){
+                return next(error);
+            }
             return res.json({country});
         }
     } catch (error){
         return next(error);
     }
 })
+
 
 module.exports = router;
 
