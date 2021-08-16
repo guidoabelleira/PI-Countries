@@ -1,8 +1,8 @@
 import Nav from '../nav/index';
 
-export default function Activity() {
+export default function About() {
     return <div>
     <Nav />
-        soy actividad
+        soy about
     </div>
 };
