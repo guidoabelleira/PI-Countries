@@ -32,7 +32,7 @@ router.post('/activity', async (req, res, next) => {
         })
         var country = await Country.findByPk(alpha3Code);
         var activityCountry = await country.addActivity(createdActivity)
-        res.send(activityCountry)
+        res.status(201).json(createdActivity)
     } catch(error) {
         next(error);
     }  

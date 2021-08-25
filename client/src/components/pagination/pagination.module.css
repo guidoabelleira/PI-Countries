@@ -1,0 +1,50 @@
+.nav {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: aquamarine;
+    margin: 10px;
+    height: 50px;
+
+}
+
+.ul{
+    box-sizing: content-box;
+    display: flex;
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 8px;
+    margin-top: 8px;
+    text-align: start;
+    text-size-adjust: 100%;
+    list-style-position: none;
+    list-style-type: none;
+    margin-block-end: 8px;
+    margin-block-start: 8px;
+    margin-bottom: 8px;
+    margin-top: 8px;
+}
+
+.li {
+    box-sizing: border-box;
+    display: list-item;
+    font-size: 16px;
+    font-weight: 400;
+    text-align: left;
+    list-style-type: none;
+    list-style-image: none;
+}
+
+.a {
+    display: block;
+    background-color: cornsilk;
+    border-bottom-style: solid;
+    box-sizing: border-box;
+    color: gray;
+    cursor: pointer;
+    text-align: left;
+    position: relative;
+    list-style-type: none;
+
+}

@@ -3,9 +3,10 @@ import axios from 'axios';
 import {useParams} from 'react-router-dom'
 
 export default function CountryDetail() {
-    const [country, setCountry] = useState({});
     const {id} = useParams();
-    console.log(id)
+    const [country, setCountry] = useState({});
+    
+    
     function getCountryByAlpha (id){
         axios.get('COUNTRIES_URL' + id)
         .then((res) => {
@@ -16,9 +17,11 @@ export default function CountryDetail() {
         getCountryByAlpha(id)
     }, []);
 
-    return <div>
+    return (
+    <div>
         
             <h1>{country.name}</h1>
         
     </div>
+    )
 };

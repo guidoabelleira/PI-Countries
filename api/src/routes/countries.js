@@ -5,7 +5,7 @@ const axios = require('axios');
 
 const router = express.Router();
 
-router.get('/', async (req, res, next) => {
+router.get('/', async (_req, res, next) => {
     try {
         const country = await Country.findAll({
             include: Activity

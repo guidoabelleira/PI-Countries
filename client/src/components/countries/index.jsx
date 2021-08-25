@@ -1,22 +1,24 @@
-import { useSelector } from "react-redux"
 import Country from '../country/index';
-import {Link} from 'react-router-dom';
+import style from './Countries.module.css';
 
-export default function Countries() {
-    var countries = useSelector(state => state.countries)
-    return <div>
+export default function Countries({countries}) {
+    return (
+    <div className={style.cards}>
         {
             countries.map((country) => {
                 
                 return <Country 
-                flag={country?.flag} 
-                name={country?.name} 
-                region={country?.region}
+                key={country.alpha3Code}
+                flag={country.flag} 
+                name={country.name} 
+                region={country.region}
+                id={country.alpha3Code}
                 />
                 
             })
         }
     </div>
+    )
 };
 
 // Imagen de la bandera
